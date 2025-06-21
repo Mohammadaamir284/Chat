@@ -138,7 +138,7 @@ const Dashboard = () => {
 
 
     const fetchUserChat = async (conversationId, receiverUser) => {
-        console.log('conversationIdgwdvqwd ', conversation)
+     
         currentConversationIdRef.current = conversationId;
         try {
             const resmessage = await fetch(
@@ -166,7 +166,7 @@ const Dashboard = () => {
             )
         );
     };
-    console.log('conversationId ', conversation)
+   
     const sendMessage = async () => {
         Socket?.emit('sendMessage', {
             conversationId: message?.conversationId,
