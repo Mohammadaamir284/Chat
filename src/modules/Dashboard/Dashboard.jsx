@@ -138,7 +138,7 @@ const Dashboard = () => {
 
 
     const fetchUserChat = async (conversationId, receiverUser) => {
-     
+
         currentConversationIdRef.current = conversationId;
         try {
             const resmessage = await fetch(
@@ -166,7 +166,7 @@ const Dashboard = () => {
             )
         );
     };
-   
+
     const sendMessage = async () => {
         Socket?.emit('sendMessage', {
             conversationId: message?.conversationId,
@@ -205,7 +205,7 @@ const Dashboard = () => {
     return (<>
 
         <div className='flex w-screen '>
-            <div className={`md:w-[25%] md:relative absolute z-50 w-screen h-screen bg-[#011031] flex flex-col p-4 space-y-4 md:block  ${isMobileFirst ? 'block' : 'hidden'}`}>
+            <div className={`md:w-[25%] md:relative absolute z-50 w-screen min-h-screen  bg-[#011031] flex flex-col p-4 space-y-4 md:block  ${isMobileFirst ? 'block' : 'hidden'}`}>
                 <div className='flex items-center justify-between'>
                     <div className='flex items-center '>
                         <img className='w-15 h-15' src="/bubble.svg" alt="" />
@@ -263,7 +263,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className='md:w-[50%] w-screen h-screen md:relative  absolute md:border-x border-white'>
+            <div className='md:w-[50%] w-screen min-h-screen md:relative  absolute md:border-x border-white'>
                 <div className='bg-[#011031] h-[11vh] flex items-center px-4'>
                     {message?.reciver?.fullname?.length > 0 && (
                         <div className='bg-gray-700 text-white flex items-center justify-between rounded-full px-3 py-2 w-full max-w-[90vw] md:max-w-[48vw] mx-auto'>
@@ -346,7 +346,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className={`md:w-[25%] md:block  w-screen md:z-0 z-50 absolute h-screen bg-[#011031] md:relative  ${isMobileSecond ? 'block' : 'hidden'}`}>
+            <div className={`md:w-[25%] md:block  w-screen md:z-0 z-50 absolute min-h-screen bg-[#011031] md:relative  ${isMobileSecond ? 'block' : 'hidden'}`}>
 
                 <div className='flex flex-col items-center justify-end p-4  text-white '>
                     <img className='bg-white w-20 h-20 rounded-full ' src="src/assets/react.svg" alt="vwwqd" />
