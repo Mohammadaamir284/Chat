@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
-import { MoreVertical, Home, Users, ArrowLeft, Edit, Cross, X } from 'lucide-react';
+import { MoreVertical, Home, Users, ArrowLeft, Edit,  X } from 'lucide-react';
 import Input from '../../components/Input';
 import { io } from 'socket.io-client';
 import { toast } from 'react-toastify';
 import MessageToast from '../../components/Message';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom'
+
 const Dashboard = () => {
 
     const [data, setdata] = useState('')
@@ -171,6 +172,7 @@ const Dashboard = () => {
         }
     };
     const fetchUserChat = async (conversationId, receiverUser) => {
+        console.log('jhwdjqvwdjjd')
         currentConversationIdRef.current = conversationId;
         try {
             const resmessage = await fetch(
@@ -187,6 +189,7 @@ const Dashboard = () => {
                 reciver: receiverUser,
                 conversationId,
             });
+            
         } catch (err) { console.error("Message fetch error:", err); }
 
         setconversation(prev =>
@@ -270,7 +273,7 @@ const Dashboard = () => {
         }
     }
     return (<>
-        <div className='flex w-screen absolute '>
+        <div className='flex w-screen'>
             <div className={`md:w-[25%] md:relative absolute z-50 w-screen h-[100vh]  bg-[#011031] flex flex-col p-4 space-y-4 md:block  ${isMobileFirst ? 'block' : 'hidden'}`}>
                 <div className='flex items-center justify-between'>
                     <div className='flex items-center '>
@@ -324,7 +327,7 @@ const Dashboard = () => {
                     <div className='left-[40%] absolute bottom-0' onClick={() => LogOut()} ><Button label='LogOut' /></div>
                 </div>
 
-                <div className='md:h-[75vh] h-[72vh] p-4 overflow-y-scroll your-class'>
+                <div className='md:h-[75vh] h-[72vh] p-2 overflow-y-scroll your-class'>
                     <ul className='flex flex-col space-y-2.5 justify-center '>
                         {conversation.length > 0 ? (
 
@@ -334,14 +337,12 @@ const Dashboard = () => {
                                 (
                                     <li
                                         key={index}
-                                        className="flex justify-between items-center gap-6 cursor-pointer"
-
+                                        className="flex justify-between items-center gap-4 cursor-pointer"
                                     >
-                                        <div className="flex items-center w-[17vw] gap-2">
+                                        <div className="w-[40%px] flex items-center gap-2">
                                             <img
-                                                className=" border block bg-white rounded-full w-12 h-12 object-contain"
+                                                className='object-contain rounded-full bg-white h-14 w-14 '
                                                 src={item?.user2?.pic}
-
                                                 alt=""
                                                 onClick={() => {
                                                     setme(!me)
@@ -351,18 +352,18 @@ const Dashboard = () => {
                                             <div className="text-white text-[15px]"
                                                 onClick={() => {
                                                     fetchUserChat(item.conversationId, item.user2),
-                                                        markNotificationsRead(item.conversationId);
+                                                    markNotificationsRead(item.conversationId);
                                                     markNotifications(currentUser.userId);
                                                     setisMobileFirst(false)
                                                     setisMobileSecond(false)
                                                 }}
                                             >
                                                 <div className=''>{item?.user2?.fullname}</div>
-                                                <div className="opacity-40 overflow-hidden w-45 text-sm">
+                                                <div className=" overflow-hidden w-45 text-sm">
                                                     {onlineUsers?.includes(item.user2.receiverId) ? (
                                                         <span style={{ color: "green" }}>● Online</span>
                                                     ) : (
-                                                        <span style={{ color: "gray" }}>● Offline</span>
+                                                        <span style={{ color: "red" }}>● Offline</span>
                                                     )}
                                                 </div>
                                             </div>
@@ -422,7 +423,7 @@ const Dashboard = () => {
                                         {onlineUsers?.includes(message?.reciver?.receiverId) ? (
                                             <span style={{ color: "green" }}>● Online</span>
                                         ) : (
-                                            <span style={{ color: "gray" }}>● Offline</span>
+                                            <span style={{ color: "red" }}>● Offline</span>
                                         )}
 
                                     </div>
